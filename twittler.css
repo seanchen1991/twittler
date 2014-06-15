@@ -1,0 +1,82 @@
+html {
+	background-color: #F3E2A9;
+}
+
+body {
+	background: #fafafa;
+	background-color: #F3E2A9;
+	font-family: Times;
+	color: #555;
+}
+
+#mascot {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#mascot img {
+	width: 120px;
+}
+
+.tweet {
+	margin: 7px 0;
+	padding: 15px;
+	width: 600px;
+	background: #fff;
+	border-bottom: 1px solid #dbdbdb;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.create_tweet {
+	width: 620px;
+	padding: 5px;
+	background: #fff;
+	border-bottom: 1px solid #dbdbdb;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input[type=text] {
+	font-size: 16px;
+	background: #fff;
+	border: 1px solid #fff;
+	padding: 4px 6px;
+	height: 20px;
+	width: 83%;
+	 transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+input[type=text]:focus {
+	outline: 0;
+}
+
+#actions {
+	display: block;
+	padding: 0 0;
+	height: 18px;
+	color: #0297ff;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#actions:hover {
+	text-decoration: underline;
+}
+
+#view_all {
+	cursor: pointer;
+	text-align: left;
+	display: none;
+}
+
+#new_tweets {
+	cursor: pointer;
+	display: inline;
+	text-align: left;
+}
+
