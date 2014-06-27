@@ -3,7 +3,7 @@ twittler.view = 'home';
 twittler.tweets = [];
 twittler.container = {
   tweets: "#tweets",
-  newTweets: "#new-tweets"
+  newTweets: "#new_tweets"
 };
 twittler.newTweetCount = 0;
 twittler.intervalId = 0;
@@ -117,7 +117,7 @@ twittler.initEventHandlers = function() {
 
     self.view = username;
     self.fetch(username).display().listen();
-    $('#viewall').css('display', 'inline-block'); 
+    $('#view_all').css('display', 'inline-block'); 
   });
 
   $(".hashtag").click( function(e){
@@ -125,20 +125,20 @@ twittler.initEventHandlers = function() {
     var hashtag = e.currentTarget.outerText;
     self.view = hashtag;
     self.fetch(hashtag).display().listen();
-    $('#viewall').css('display', 'inline-block'); 
+    $('#view_all').css('display', 'inline-block'); 
   });
 
-  $("#new-tweets").click( function(e){
+  $("#new_tweets").click( function(e){
     e.preventDefault();
-    $('#new-tweets').text('');
+    $('#new_tweets').text('');
     self.fetch(self.view).display().listen();
   });
 
-  $('#viewall').click( function(e) {
+  $('#view_all').click( function(e) {
     e.preventDefault();
     self.view = 'home';
     self.fetch(self.view).display().listen();
-    $('#viewall').hide();
+    $('#view_all').hide();
   });
 
 };

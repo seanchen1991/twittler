@@ -6,32 +6,33 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="twittler.js"></script>
+    <script src="timeago.js"></script>
     <script>
 
-      $(document).ready(function(){
-        updateTweets();
-        setInterval(updateTweets, 0);
-      });
+      visitor = "user";
+        $(document).ready(function() {
+          twittler.fetch().display().listen();
+        });
 
     </script>
   </head>
   <body>
-    <div id="mascot" class="col-md-3">
-      <img src="twitlerbird.png" width="40%">
-    </div>
-    <div class="col-md-6">
-      <div class="create_tweet">
-        <form id="create">
-          <input id="message" type="text" placeholder="Type and hit 'enter' to tweet!">
-        </form>
+    <div class="container">
+      <div id="mascot" class="col-md-3">
+        <img src="twitlerbird.png" width="40%">
       </div>
-      <div id="actions">
-        <div id"view_all">View All Tweets <span style="color:#ddd;">|</span>
-      <div class="allTweets"></div>
+      <div class="col-md-6">
+        <div class="create_tweet">
+          <form id="create">
+            <input id="message" type="text" placeholder="Type and hit 'enter' to tweet!">
+          </form>
         </div>
-        <div id="new_tweets"></div>
-      </div>
-      <div id="tweets">
+        <div id="actions">
+          <div id"view_all">View All Tweets <span style="color:#ddd;">|</span></div>
+          <div id="new_tweets"></div>
+        </div>
+        <div id="tweets"></div>
+        </div>
       </div>
     </div>
   </body>

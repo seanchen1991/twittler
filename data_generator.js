@@ -7,6 +7,7 @@
 window.streams = {};
 streams.home = [];
 streams.users = {};
+streams.hashtags = {};
 streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
@@ -16,8 +17,38 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  streams.users[username].push(newTweet);
-  streams.home.push(newTweet);
+  var hashtagIndex = newTweet.message.indexOf('#');
+  var hashtag;
+
+  if (!streams.users[username]) {
+    streams.users[username] = [];
+  } 
+
+  if ( hashtagIndex > -1) {
+    hashtag = parseHashtag(newTweet.message);
+    if (!streams.hashtags[hashtag]) {
+      streams.hashtags[hashtag] = [];
+    }
+    streams.hashtags[hashtag].unshift(newTweet);
+  }
+
+  streams.users[username].unshift(newTweet);
+  streams.home.unshift(newTweet);
+
+  function parseHashtag(msg) {
+    var hashtag;
+    var begin;
+    var end;
+
+    begin = hashtagIndex;
+    for (var i = hashtagIndex; i < msg.length; i++) {
+       if (msg[i] === ' ') {
+          end = i;
+          break;
+       }
+    }
+    return msg.slice(begin, end);
+  }
 };
 
 // utility function
@@ -65,5 +96,6 @@ var writeTweet = function(message){
   var tweet = {};
   tweet.user = visitor;
   tweet.message = message;
+  tweet.created_at = new Date();
   addTweet(tweet);
 };
