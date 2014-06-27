@@ -62,3 +62,83 @@ twittler.display = function(tweets) {
 
   return this;
 };
+
+twittler.listen = function() {
+  var self = this;
+  var startlength = self.tweets.length;
+  var intervalId;
+
+  if (self.intervalId) {
+    $(self.container.newTweets).text('');
+    clearInterval(self.intervalId); 
+  }
+
+  self.intervalId = setInterval(listener, 300); 
+
+  function listener() {
+    if (self.tweets.length > startlength) {
+      self.newTweetCount = self.tweets.length - startlength;
+      updateNewTweetCount(self.newTweetCount);
+    }
+  }
+
+  twittler.writeTweet = function(msg) {
+  msg = $('#message').val();
+
+  if (msg && msg !== '') {
+    writeTweet(msg);
+    $('#message').val(''); 
+    this.fetch(this.view).display().listen(); 
+  }
+};
+
+  function updateNewTweetCount(count) {
+    $(self.container.newTweets).text(count + ' new tweets');
+  }
+
+};
+
+twittler.initEventHandlers = function() {
+  var self = this;
+
+
+  $("input").unbind('keypress').keypress(function(e) { 
+    if (e.which === 13) {
+      e.preventDefault();
+      self.writeTweet(); 
+      return false;
+    }
+    return true;      
+  });
+
+  $(".username").click( function(e){
+    e.preventDefault();
+    var username = e.currentTarget.outerText.replace("@", "");
+
+    self.view = username;
+    self.fetch(username).display().listen();
+    $('#viewall').css('display', 'inline-block'); 
+  });
+
+  $(".hashtag").click( function(e){
+    e.preventDefault();
+    var hashtag = e.currentTarget.outerText;
+    self.view = hashtag;
+    self.fetch(hashtag).display().listen();
+    $('#viewall').css('display', 'inline-block'); 
+  });
+
+  $("#new-tweets").click( function(e){
+    e.preventDefault();
+    $('#new-tweets').text('');
+    self.fetch(self.view).display().listen();
+  });
+
+  $('#viewall').click( function(e) {
+    e.preventDefault();
+    self.view = 'home';
+    self.fetch(self.view).display().listen();
+    $('#viewall').hide();
+  });
+
+};
